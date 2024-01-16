@@ -1,12 +1,12 @@
-// tổng hợp tất cả các routes của các routes khác: videoRoutes, userRoutes,......
+import express from "express";
+import likeRoutes from "./LikeRoutes.js";
 
-import express from 'express';
-import userRoutes from './userRoutes.js';
-import videoRoutes from './videoRoutes.js';
+const router = express.Router();
 
-const rootRoutes = express.Router();
+router.get("/", (req, res) => {
+  res.send("Welcome to the root route!");
+});
 
-rootRoutes.use("/video", videoRoutes);
-rootRoutes.use("/user", userRoutes);
+router.use("/likes", likeRoutes);
 
-export default rootRoutes;
+export default router;

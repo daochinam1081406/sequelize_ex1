@@ -1,8 +1,16 @@
 import express from "express";
-import { getUser } from "../controllers/userControllers.js";
+import {
+  likeRestaurant,
+  getLikedRestaurantsByUser,
+  getUsersWhoLikedRestaurant,
+} from "../controllers/LikeRestaurantControllers.js";
 
-const userRoutes = express.Router();
+const router = express.Router();
 
-userRoutes.get("/get-user", getUser);
+router.post("/like", likeRestaurant);
 
-export default userRoutes;
+router.get("/user/:user_id/likes", getLikedRestaurantsByUser);
+
+router.get("/restaurant/:res_id/likes", getUsersWhoLikedRestaurant);
+
+export default router;
