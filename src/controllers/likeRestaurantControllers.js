@@ -33,7 +33,19 @@ export const likeRestaurant = async (req, res) => {
 export const getLikedRestaurantsByUser = async (req, res) => {
   try {
     const { user_id } = req.params;
-    const likedRestaurants = await LikeRes.findAll({ where: { user_id } });
+
+    // Check if user_id is undefined or not a number
+    if (user_id === undefined || isNaN(user_id)) {
+      return res.status(400).json({ message: "Invalid user_id." });
+    }
+
+    // Convert user_id to a number
+    const userId = parseInt(user_id, 10);
+
+    const likedRestaurants = await LikeRes.findAll({
+      where: { user_id: userId },
+    });
+
     res.status(200).json(likedRestaurants);
   } catch (error) {
     console.error(error);
