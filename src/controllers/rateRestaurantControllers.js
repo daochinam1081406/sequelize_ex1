@@ -1,4 +1,3 @@
-// controllers/RateResControllers.js
 import RateRes from "../models/rate_res.js";
 
 // Add a restaurant rating
@@ -6,18 +5,15 @@ export const addRestaurantRating = async (req, res) => {
   try {
     const { user_id, res_id, amount } = req.body;
 
-    // Check if the user has already rated the restaurant
     const existingRating = await RateRes.findOne({
       where: { user_id, res_id },
     });
 
     if (existingRating) {
-      // User has already rated, update the existing rating
       existingRating.amount = amount;
       existingRating.date_rate = new Date();
       await existingRating.save();
     } else {
-      // User hasn't rated yet, create a new rating
       await RateRes.create({ user_id, res_id, amount, date_rate: new Date() });
     }
 

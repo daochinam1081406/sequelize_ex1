@@ -3,7 +3,7 @@ import {
   addRestaurantRating,
   getRatingsByRestaurant,
   getRatingsByUser,
-} from "../controllers/RateResControllers.js";
+} from "../controllers/RateRestaurantControllers.js";
 
 const router = express.Router();
 
